@@ -4,31 +4,31 @@ import './App.css'
 
 function App() {
   const [links, setLinks] = useState([])
-  // State baru untuk efek ngetik
   const [displayText, setDisplayText] = useState('')
   const fullText = 'Fullstack Developer | DevHandal 2026'
 
   useEffect(() => {
-    fetchLinks();
+    fetchLinks()
 
-    let i = 0;
-    let isMounted = true; // Flag buat mastiin komponen masih ada
-    setDisplayText(''); 
+    let i = 0
+    let isMounted = true
+    setDisplayText('')
 
-    const typing = setInterval(() => {
+    // Logika rekursif: lebih stabil untuk mobile browser
+    function type() {
       if (isMounted && i < fullText.length) {
-        setDisplayText(fullText.substring(0, i + 1));
-        i++;
-      } else {
-        clearInterval(typing);
+        setDisplayText(fullText.substring(0, i + 1))
+        i++
+        setTimeout(type, 100)
       }
-    }, 100);
+    }
+
+    type()
 
     return () => {
-      isMounted = false;
-      clearInterval(typing);
-    };
-  }, []);
+      isMounted = false
+    }
+  }, [])
 
   const fetchLinks = async () => {
     const { data, error } = await supabase.from('links').select('*')
@@ -56,7 +56,6 @@ function App() {
           className="profile-img"
         />
         <h1>Alfi Febriawan</h1>
-        {/* Bio dengan kursor kedip */}
         <p className="bio">
           {displayText}
           <span className="cursor">|</span>

@@ -209,27 +209,21 @@ footer {
   display: inline-block;
   font-weight: bold;
   color: #4ade80;
-  margin-left: 2px;
-  animation: blink 0.7s infinite;
-  vertical-align: middle;
+  margin-left: 4px;
+  /* Mastiin animasi blink jalan terus */
+  animation: blink-anim 0.8s step-end infinite;
 }
 
-@keyframes blink {
-  0%, 100% { 
-    opacity: 1; 
-  }
-  50% { 
-    opacity: 0; 
-  }
+@keyframes blink-anim {
+  from, to { opacity: 1; }
+  50% { opacity: 0; }
 }
 
-/* Pastiin font bio lo monospace biar makin dapet vibe kodingannya */
 .bio {
   font-family: 'Courier New', Courier, monospace;
-  font-size: 1rem; /* Ukuran standar biar enak dibaca di HP */
+  font-size: 0.9rem; /* Dikecilin dikit biar gak nabrak di layar HP kecil */
   color: #cccccc;
+  min-height: 1.5em;
   margin: 10px 0;
-  display: inline-block; /* Biar kursornya nempel terus di ujung teks */
-  min-height: 1.5em; /* Kasih ruang biar gak loncat-loncat pas ngetik */
-  word-break: break-word; /* Biar kalau teks kepanjangan di HP gak keluar layar */
+  letter-spacing: 0.5px;
 }
