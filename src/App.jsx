@@ -16,6 +16,18 @@ function App() {
     else setLinks(data)
   }
 
+  // FUNGSI BARU: Untuk lapor ke Supabase kalau link diklik
+  const trackClick = async (id, currentClicks) => {
+    const { error } = await supabase
+      .from('links')
+      .update({ clicks: (currentClicks || 0) + 1 })
+      .eq('id', id)
+
+    if (error) console.log('Error updating clicks:', error)
+    // Kita panggil fetchLinks lagi biar data di UI langsung update (opsional)
+    fetchLinks()
+  }
+
   return (
     <div className="container">
       <header>
@@ -36,20 +48,25 @@ function App() {
             target="_blank"
             rel="noopener noreferrer"
             className="link-card"
+            onClick={() => trackClick(link.id, link.clicks)}
           >
-            <span className="icon">
-              {/* Logika cerdas: Cek kalau icon isinya link (http), tampilin gambar. Kalau bukan, tampilin teks/emoji */}
-              {link.icon && link.icon.startsWith('http') ? (
-                <img
-                  src={link.icon}
-                  alt={link.label}
-                  style={{ width: '24px', height: '24px', display: 'block' }}
-                />
-              ) : (
-                link.icon
-              )}
-            </span>
-            <span className="label">{link.label}</span>
+            <div className="link-content">
+              <span className="icon">
+                {link.icon && link.icon.startsWith('http') ? (
+                  <img
+                    src={link.icon}
+                    alt={link.label}
+                    style={{ width: '24px', height: '24px', display: 'block' }}
+                  />
+                ) : (
+                  link.icon
+                )}
+              </span>
+              <span className="label">{link.label}</span>
+            </div>
+
+            {/* Tampilan angka klik di pojok kanan */}
+            <span className="click-count">{link.clicks || 0} clicks</span>
           </a>
         ))}
       </div>
