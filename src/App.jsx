@@ -9,22 +9,26 @@ function App() {
   const fullText = 'Fullstack Developer | DevHandal 2026'
 
   useEffect(() => {
-    fetchLinks()
+    fetchLinks();
 
-    // Logika Efek Typewriter
-    let i = 0
-    setDisplayText('') // Reset teks awal
+    let i = 0;
+    let isMounted = true; // Flag buat mastiin komponen masih ada
+    setDisplayText(''); 
+
     const typing = setInterval(() => {
-      if (i < fullText.length) {
-        setDisplayText((prev) => prev + fullText.charAt(i))
-        i++
+      if (isMounted && i < fullText.length) {
+        setDisplayText(fullText.substring(0, i + 1));
+        i++;
       } else {
-        clearInterval(typing)
+        clearInterval(typing);
       }
-    }, 100) // Kecepatan ngetik: 100ms per huruf
+    }, 100);
 
-    return () => clearInterval(typing)
-  }, [])
+    return () => {
+      isMounted = false;
+      clearInterval(typing);
+    };
+  }, []);
 
   const fetchLinks = async () => {
     const { data, error } = await supabase.from('links').select('*')
