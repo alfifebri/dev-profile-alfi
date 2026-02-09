@@ -7,72 +7,88 @@
   --text-dim: #a0a0a0;
 }
 
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+  background: #4ade80;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
+}
+
 body {
   margin: 0;
-  min-height: 100vh;
+  padding: 0;
   background: radial-gradient(circle at top right, #1a1a1a, #0a0a0a);
   color: white;
-  display: block;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  min-height: 100vh;
 }
 
 .container {
   max-width: 480px;
   margin: 0 auto;
-  padding: 60px 20px;
+  padding: 40px 20px;
   text-align: center;
-}
-
-header {
-  margin-bottom: 40px;
 }
 
 .profile-img {
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  border: 2px solid var(--primary-color);
-  padding: 4px;
+  border: 3px solid #4ade80;
+  box-shadow: 0 0 20px rgba(74, 222, 128, 0.3);
   margin-bottom: 15px;
-  transition: transform 0.3s ease;
-}
-
-.profile-img:hover {
-  transform: rotate(5deg) scale(1.1);
 }
 
 h1 {
   font-size: 1.8rem;
-  color: var(--text-main);
-  margin: 0;
+  margin: 10px 0;
+  letter-spacing: -0.5px;
 }
 
 .bio {
-  color: var(--text-dim);
-  font-size: 0.9rem;
-  margin-top: 8px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.95rem;
+  color: #cccccc;
+  min-height: 1.5em;
+  margin-bottom: 30px;
+  display: inline-block;
+}
+
+.cursor {
+  font-weight: bold;
+  color: #4ade80;
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 .links-container {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  animation-fill-mode: forwards;
 }
 
 .link-card {
   display: flex;
-  justify-content: space-between; /* Ini kunci biar angka klik pindah ke kanan */
+  justify-content: space-between;
   align-items: center;
-  gap: 16px;
   padding: 16px 20px;
-  margin-bottom: 16px;
-  background: rgba(255, 255, 255, 0.05); 
-  backdrop-filter: blur(10px); 
-  border: 1px solid rgba(255, 255, 255, 0.1); 
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
   text-decoration: none;
   color: white;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
 }
@@ -80,28 +96,39 @@ h1 {
 .link-content {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 15px;
+}
+
+.custom-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.label {
+  font-weight: 500;
+  font-size: 1rem;
 }
 
 .click-count {
-  font-size: 0.75rem;
-  background: rgba(255, 255, 255, 0.1);
+  font-size: 0.7rem;
+  background: rgba(74, 222, 128, 0.1);
+  color: #4ade80;
   padding: 4px 10px;
   border-radius: 20px;
-  color: #4ade80; /* Warna hijau glow lo */
   font-weight: 600;
-  white-space: nowrap; /* Biar tulisan 'clicks' nggak turun ke bawah */
-  opacity: 0.7;
-  transition: all 0.3s ease;
+  opacity: 0.8;
 }
 
-.link-card:hover .click-count {
-  opacity: 1;
-  background: rgba(74, 222, 128, 0.2);
-  transform: scale(1.1);
+/* Hover Effects */
+.link-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #4ade80;
+  box-shadow: 0 10px 20px rgba(74, 222, 128, 0.2);
 }
 
-/* Efek kilatan cahaya (Sparkle) */
+/* Sparkle Effect */
 .link-card::after {
   content: "";
   position: absolute;
@@ -109,9 +136,9 @@ h1 {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
   transform: rotate(45deg);
-  transition: 0.5s;
+  transition: 0.6s;
   pointer-events: none;
   opacity: 0;
 }
@@ -121,109 +148,17 @@ h1 {
   opacity: 1;
 }
 
-.link-card:hover {
-  transform: translateY(-5px) scale(1.02);
-  border-color: #4ade80; 
-  box-shadow: 0 10px 25px rgba(74, 222, 128, 0.3);
-}
-
-.label {
-  font-weight: 600;
-  letter-spacing: 0.5px;
-}
-
-.icon {
-  font-size: 1.4rem;
-  margin-right: 15px;
-}
-
-.label {
-  font-weight: 500;
-  font-size: 1rem;
-}
-
 footer {
-  margin-top: 60px;
-  color: #444;
+  margin-top: 50px;
   font-size: 0.8rem;
+  opacity: 0.5;
 }
 
-/* Animasi Fade In Up */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+/* Mobile Adjustments */
+@media (max-width: 480px) {
+  .container {
+    padding: 20px 15px;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Terapkan ke Header */
-header {
-  animation: fadeInUp 0.8s ease-out forwards;
-}
-
-/* Terapkan ke Container Link dengan delay */
-.links-container {
-  animation: fadeInUp 1s ease-out 0.2s forwards;
-  opacity: 0; /* Biar nunggu animasi mulai */
-  animation-fill-mode: forwards;
-}
-
-/* Terapkan ke Footer */
-footer {
-  animation: fadeInUp 1s ease-out 0.5s forwards;
-  opacity: 0;
-  animation-iteration-count: forwards;
-}
-
-/* Styling Scrollbar buat Chrome, Safari, dan Edge */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #0a0a0a; /* Warna gelap biar nyambung sama background body lo */
-}
-
-::-webkit-scrollbar-thumb {
-  background: #4ade80; /* Warna hijau neon DevHandal lo */
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(74, 222, 128, 0.5); /* Efek nyala (glow) */
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #22c55e; /* Warna hijau agak gelap pas disentuh */
-}
-
-/* Styling buat Firefox */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: #4ade80 #0a0a0a;
-}
-
-/* Animasi Kursor Kedip buat Efek Typewriter */
-.cursor {
-  display: inline-block;
-  font-weight: bold;
-  color: #4ade80;
-  margin-left: 4px;
-  /* Mastiin animasi blink jalan terus */
-  animation: blink-anim 0.8s step-end infinite;
-}
-
-@keyframes blink-anim {
-  from, to { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-.bio {
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 0.9rem; /* Dikecilin dikit biar gak nabrak di layar HP kecil */
-  color: #cccccc;
-  min-height: 1.5em;
-  margin: 10px 0;
-  letter-spacing: 0.5px;
+  h1 { font-size: 1.5rem; }
+  .bio { font-size: 0.85rem; }
 }

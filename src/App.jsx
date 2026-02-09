@@ -10,29 +10,28 @@ function App() {
   useEffect(() => {
     fetchLinks()
 
+    // Efek Typewriter yang lebih stabil untuk Mobile
     let i = 0
     let isMounted = true
     setDisplayText('')
 
-    // Logika rekursif: lebih stabil untuk mobile browser
-    function type() {
+    const typing = setInterval(() => {
       if (isMounted && i < fullText.length) {
         setDisplayText(fullText.substring(0, i + 1))
         i++
-        setTimeout(type, 100)
+      } else {
+        clearInterval(typing)
       }
-    }
-
-    type()
+    }, 100)
 
     return () => {
       isMounted = false
+      clearInterval(typing)
     }
   }, [])
 
   const fetchLinks = async () => {
     const { data, error } = await supabase.from('links').select('*')
-
     if (error) console.log('Error fetching links:', error)
     else setLinks(data)
   }
@@ -44,17 +43,19 @@ function App() {
       .eq('id', id)
 
     if (error) console.log('Error updating clicks:', error)
-    fetchLinks()
+    fetchLinks() // Refresh data otomatis setelah klik
   }
 
   return (
     <div className="container">
       <header>
-        <img
-          src="https://github.com/alfifebri.png"
-          alt="Profile"
-          className="profile-img"
-        />
+        <div className="profile-wrapper">
+          <img
+            src="https://github.com/alfifebri.png"
+            alt="Profile"
+            className="profile-img"
+          />
+        </div>
         <h1>Alfi Febriawan</h1>
         <p className="bio">
           {displayText}
@@ -78,7 +79,7 @@ function App() {
                   <img
                     src={link.icon}
                     alt={link.label}
-                    style={{ width: '24px', height: '24px', display: 'block' }}
+                    className="custom-icon"
                   />
                 ) : (
                   link.icon
@@ -86,7 +87,6 @@ function App() {
               </span>
               <span className="label">{link.label}</span>
             </div>
-
             <span className="click-count">{link.clicks || 0} clicks</span>
           </a>
         ))}
