@@ -1,0 +1,125 @@
+
+:root {
+  --primary-color: #3ecf8e; /* Hijau Khas Supabase */
+  --bg-dark: #0a0a0a;
+  --card-bg: #161616;
+  --text-main: #ffffff;
+  --text-dim: #a0a0a0;
+}
+
+body {
+  background-color: var(--bg-dark);
+  margin: 0;
+  font-family: 'Inter', -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+header {
+  margin-bottom: 40px;
+}
+
+.profile-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 2px solid var(--primary-color);
+  padding: 4px;
+  margin-bottom: 15px;
+  transition: transform 0.3s ease;
+}
+
+.profile-img:hover {
+  transform: rotate(5deg) scale(1.1);
+}
+
+h1 {
+  font-size: 1.8rem;
+  color: var(--text-main);
+  margin: 0;
+}
+
+.bio {
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  margin-top: 8px;
+}
+
+.links-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation-fill-mode: forwards;
+}
+
+.link-card {
+  background-color: var(--card-bg);
+  color: var(--text-main);
+  text-decoration: none;
+  padding: 16px 20px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #282828;
+  transition: all 0.2s ease-in-out;
+}
+
+.link-card:hover {
+  background-color: #1f1f1f;
+  border-color: var(--primary-color);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.icon {
+  font-size: 1.4rem;
+  margin-right: 15px;
+}
+
+.label {
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+footer {
+  margin-top: 60px;
+  color: #444;
+  font-size: 0.8rem;
+}
+
+/* Animasi Fade In Up */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Terapkan ke Header */
+header {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Terapkan ke Container Link dengan delay */
+.links-container {
+  animation: fadeInUp 1s ease-out 0.2s forwards;
+  opacity: 0; /* Biar nunggu animasi mulai */
+  animation-fill-mode: forwards;
+}
+
+/* Terapkan ke Footer */
+footer {
+  animation: fadeInUp 1s ease-out 0.5s forwards;
+  opacity: 0;
+  animation-iteration-count: forwards;
+}
