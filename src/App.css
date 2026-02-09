@@ -8,10 +8,11 @@
 }
 
 body {
-  background-color: var(--bg-dark);
   margin: 0;
-  font-family: 'Inter', -apple-system, sans-serif;
-  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  background: radial-gradient(circle at top right, #1a1a1a, #0a0a0a);
+  color: white;
+  display: block;
 }
 
 .container {
@@ -59,22 +60,32 @@ h1 {
 }
 
 .link-card {
-  background-color: var(--card-bg);
-  color: var(--text-main);
-  text-decoration: none;
-  padding: 16px 20px;
-  border-radius: 12px;
   display: flex;
   align-items: center;
-  border: 1px solid #282828;
-  transition: all 0.2s ease-in-out;
+  gap: 16px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  background: rgba(255, 255, 255, 0.05); /* Efek transparan */
+  backdrop-filter: blur(10px); /* Efek kaca buram */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Border tipis */
+  border-radius: 12px;
+  text-decoration: none;
+  color: white;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
 }
 
 .link-card:hover {
-  background-color: #1f1f1f;
-  border-color: var(--primary-color);
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  transform: translateY(-5px) scale(1.02);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #4ade80; /* Warna hijau khas DevHandal lo */
+  box-shadow: 0 10px 25px rgba(74, 222, 128, 0.2);
+}
+
+.label {
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
 .icon {
