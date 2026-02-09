@@ -178,3 +178,53 @@ footer {
   opacity: 0;
   animation-iteration-count: forwards;
 }
+
+/* Styling Scrollbar buat Chrome, Safari, dan Edge */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a; /* Warna gelap biar nyambung sama background body lo */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4ade80; /* Warna hijau neon DevHandal lo */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(74, 222, 128, 0.5); /* Efek nyala (glow) */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #22c55e; /* Warna hijau agak gelap pas disentuh */
+}
+
+/* Styling buat Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #4ade80 #0a0a0a;
+}
+
+/* Animasi Kursor Kedip buat Efek Typewriter */
+.cursor {
+  font-weight: bold;
+  color: #4ade80; /* Warna hijau neon khas DevHandal lo */
+  margin-left: 2px;
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { 
+    opacity: 1; 
+  }
+  50% { 
+    opacity: 0; 
+  }
+}
+
+/* Pastiin font bio lo monospace biar makin dapet vibe kodingannya */
+.bio {
+  font-family: 'Courier New', Courier, monospace;
+  min-height: 1.2em;
+  margin-top: 8px;
+  color: #cccccc;
+}

@@ -4,9 +4,26 @@ import './App.css'
 
 function App() {
   const [links, setLinks] = useState([])
+  // State baru untuk efek ngetik
+  const [displayText, setDisplayText] = useState('')
+  const fullText = 'Fullstack Developer | DevHandal 2026'
 
   useEffect(() => {
     fetchLinks()
+
+    // Logika Efek Typewriter
+    let i = 0
+    setDisplayText('') // Reset teks awal
+    const typing = setInterval(() => {
+      if (i < fullText.length) {
+        setDisplayText((prev) => prev + fullText.charAt(i))
+        i++
+      } else {
+        clearInterval(typing)
+      }
+    }, 100) // Kecepatan ngetik: 100ms per huruf
+
+    return () => clearInterval(typing)
   }, [])
 
   const fetchLinks = async () => {
@@ -16,7 +33,6 @@ function App() {
     else setLinks(data)
   }
 
-  // FUNGSI BARU: Untuk lapor ke Supabase kalau link diklik
   const trackClick = async (id, currentClicks) => {
     const { error } = await supabase
       .from('links')
@@ -24,7 +40,6 @@ function App() {
       .eq('id', id)
 
     if (error) console.log('Error updating clicks:', error)
-    // Kita panggil fetchLinks lagi biar data di UI langsung update (opsional)
     fetchLinks()
   }
 
@@ -37,7 +52,11 @@ function App() {
           className="profile-img"
         />
         <h1>Alfi Febriawan</h1>
-        <p className="bio">Fullstack Developer | DevHandal 2026 </p>
+        {/* Bio dengan kursor kedip */}
+        <p className="bio">
+          {displayText}
+          <span className="cursor">|</span>
+        </p>
       </header>
 
       <div className="links-container">
@@ -65,7 +84,6 @@ function App() {
               <span className="label">{link.label}</span>
             </div>
 
-            {/* Tampilan angka klik di pojok kanan */}
             <span className="click-count">{link.clicks || 0} clicks</span>
           </a>
         ))}
